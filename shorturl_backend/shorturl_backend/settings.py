@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,12 +43,12 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://example.com/",
-    "http://subdomain.example.com/",
-    "http://yourapp.com/",
-    "https://yourapp.com/", #githubbbbbbbbbbbb
-    "http://localhost:3000/",  # Para desarrollo local
-    "http://127.0.0.1:8000/",  # También localhost
+    "http://example.com",
+    "http://subdomain.example.com",
+    "http://yourapp.com",
+    "https://yourapp.com",  # GitHub
+    "http://localhost:3000",  # Para desarrollo local
+    "http://127.0.0.1:8000",  # También localhost
 ]
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',    
@@ -85,15 +85,17 @@ WSGI_APPLICATION = 'shorturl_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'BigProyect',
         'CLIENT': {
-            'host': 'mongodb+srv://paquisaya:lKgx49JVxAFyJIhC@bigproyect.bzkpg.mongodb.net/shorturl_db',
+            'host': config('DB_HOST'),
             'port': 27017,
-            'username': 'paquisaya',
-            'password': 'lKgx49JVxAFyJIhC',
+            'username': config('DB_USERNAME'),
+            'password': config('DB_PASSWORD'),
             'authMechanism': 'SCRAM-SHA-1',
             'ssl': True
         }
